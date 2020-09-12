@@ -31,6 +31,7 @@ class Info extends Component {
                                 </h5>
                                 <p className="card-text">{headerText}</p>
                                 <Link
+                                    onClick={() => value.handleDetail(id)}
                                     to="/details"
                                     className="btn btn-outline-primary text-uppercase"
                                 >

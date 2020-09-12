@@ -12,23 +12,37 @@ class InfoProvider extends Component {
         reviews : reviews,
         detailInfo : detailInfo,
         news: news
-    }
+    };
 
+    getItem = id => {
+        const item = this.state.placeInfo.find(item => item.id === id);
+        return item;
+    };
+
+    handleDetail = id => {
+        const item = this.getItem(id);
+        this.setState(() => {
+            return {
+                detailInfo : item
+            };
+        });
+    };
 
     render() {
         return (
             <InfoContext.Provider value={{
                 placeInfo: this.state.placeInfo,
                 reviews : this.state.reviews,
-                //maps : this.state.maps,
-                //headerTitle : this.state.headerTitle,
-                //headerSubTitle : this.state.headerSubTitle,
-                //headerText : this.state.headerText,
+                maps : this.state.maps,
+                headerTitle : this.state.headerTitle,
+                headerSubTitle : this.state.headerSubTitle,
+                headerText : this.state.headerText,
                 detailInfo : this.state.detailInfo,
                 news : this.state.news,
-                //name : this.state.name,
-                //avatar : this.state.avatar,
-                //comment : this.state.commnet
+                name : this.state.name,
+                avatar : this.state.avatar,
+                comment : this.state.commnet,
+                handleDetail : this.handleDetail
 
 
             }}>
