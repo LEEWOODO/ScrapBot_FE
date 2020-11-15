@@ -32,7 +32,7 @@ function Navbar() {
                         <Link className="nav-link text-white text-uppercase ml-5" to="/contacts">Contact Us</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link text-white text-uppercase ml-5" to="/contacts">My Page&nbsp;<i class="fas fa-user"></i></Link>
+                        <Link className="nav-link text-white text-uppercase ml-5" to="/contacts">My Page&nbsp;<i className="fas fa-user"></i></Link>
                     </li>
                 </ul>
                 {/* <form className="form-inline my-2 my-lg-0">

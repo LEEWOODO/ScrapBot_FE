@@ -22,13 +22,15 @@ class KeywordsCard extends Component {
                     <div className="container col-5 col-lg-2 mx-auto mb-2">
                         <div style={{ width: '18rem' }}>
                             <div className="card-body">
+
                                 <Link
                                     // onClick={() => 
                                     //     value.handleDeleteKeywords(keywordIdx)
                                     // }
                                     className="btn btn-outline-dark"
+
                                 >
-                                    {keyword} &nbsp;<i class="fas fa-times"></i>
+                                    {keyword} &nbsp;<i className="fas fa-times"></i>
                                 </Link>
                             </div>
                         </div>
