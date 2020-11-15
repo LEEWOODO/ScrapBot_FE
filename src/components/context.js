@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { placeInfo, reviews, detailInfo, news } from '../data'
+import { placeInfo, reviews, detailInfo, news, keywords } from '../data'
 import { ThemeConsumer } from 'styled-components';
 
 
@@ -11,7 +11,8 @@ class InfoProvider extends Component {
         placeInfo : placeInfo,
         reviews : reviews,
         detailInfo : detailInfo,
-        news: news
+        news : news,
+        keywords : keywords
     };
 
     getItem = id => {
@@ -28,6 +29,10 @@ class InfoProvider extends Component {
         });
     };
 
+    handleDeleteKeywords = id => {
+        alert(id);
+    };
+
     render() {
         return (
             <InfoContext.Provider value={{
@@ -42,7 +47,12 @@ class InfoProvider extends Component {
                 name : this.state.name,
                 avatar : this.state.avatar,
                 comment : this.state.commnet,
-                handleDetail : this.handleDetail
+                handleDetail : this.handleDetail,
+
+                // keywords
+                keywords : this.state.keywords,
+                handleDeleteKeywords: this.handleDeleteKeywords
+
 
 
             }}>

@@ -12,7 +12,7 @@ import News from './components/pages/News';
 import Contacts from './components/pages/Contacts';
 import Details from './components/pages/Details';
 import NotFoundPage from './components/pages/NotFoundPage';
-
+import Keywords from './components/pages/Keywords';
 
 
 // 자동정렬 : 시프트 + 옵션 + F
@@ -27,6 +27,7 @@ class App extends Component {
           <Route path="/news" component={News} />
           <Route path="/contacts" component={Contacts} />
           <Route path="/details" component={Details} />
+          <Route path="/keywords" component={Keywords} />
           <Route component={NotFoundPage} />
         </Switch>
         <Footer />

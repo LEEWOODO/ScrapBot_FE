@@ -168,3 +168,62 @@ export const news = [
       'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure maiores optio praesentium voluptate natus velit atque eaque eos quae perspiciatis. Perferendis reprehenderit aspernatur excepturi sint saepe quam laboriosam provident ducimus.'
   }
 ];
+
+export const keywords = [
+  {
+    keywordIdx : 0,
+    userId: 0,
+    keywords: 'keyword0-0'
+  },
+  {
+    keywordIdx : 1,
+    userId: 0,
+    keywords: 'keyword0-1'
+  },
+  {
+    keywordIdx : 2,
+    userId: 0,
+    keywords: 'keyword0-2'
+  },
+  {
+    keywordIdx : 3,
+    userId: 0,
+    keywords: 'keyword0-3'
+  },
+  {
+    keywordIdx : 4,
+    userId: 0,
+    keywords: 'keyword0-4'
+  },
+  {
+    keywordIdx : 5,
+    userId: 0,
+    keywords: 'keyword0-5'
+  },
+  {
+    keywordIdx : 6,
+    userId: 1,
+    keywords: 'keyword1-0'
+  },
+  {
+    keywordIdx : 7,
+    userId: 1,
+    keywords: 'keyword1-1'
+  },
+  {
+    keywordIdx : 8,
+    userId: 1,
+    keywords: 'keyword1-2'
+  },
+  {
+    keywordIdx : 9,
+    userId: 1,
+    keywords: 'keyword1-3'
+  },
+  {
+    keywordIdx : 10,
+    userId: 1,
+    keywords: 'keyword1-4'
+  }
+  
+];
