@@ -4,46 +4,45 @@ import { Link } from 'react-router-dom';
 import { InfoConsumer } from '../context';
 
 class Keywords extends Component {
-    id = 0;
-    state = {
+    constructor(props) {
+        super(props);
 
-        // keywords : [
-        //     "봄","여름","가을","겨울"
-
-        // ],
-
-        userEmail: "dnejdzlr2@naver.com",
-
-        keywords: [
-            // {
-            //     idx : 0,
-            //     title: "title"
-            // }
-        ],
-        inputKeyword: "",
+        // Quiz 자체에 state를 할당하고, items에 기본값을 줍니다.
+        this.state = {
+            isLogin: false,
+            email: "",
+            userinfo: {},
+            newsResult: [],
+        };
     }
 
-
     async componentDidMount() {
-        //    await axios.get('https://dog.ceo/api/breeds/image/random')
-        //         .then(response => {
-        //             console.log("rio : " + response.data);
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         });
+        await axios.get('https://dog.ceo/api/breeds/image/random')
+            .then(response => {
+                console.log("rio : " + response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
 
         await axios.get('http://localhost:8080/api/user/info/' + this.state.userEmail)
             .then(response => {
-                let indexNumber = 0;
+                console.log("rio : " + response.data);
 
                 let keywords = response.data.keywords;
-                keywords = keywords.map(function (element) {
-                    return { idx: indexNumber++, title: element }
-                });
+                console.log(keywords);
+                let indexNumber = 0;
+                keywords = keywords.map(function (element) { return { idx: indexNumber++, title: element } });
 
                 this.setState({ keywords });
+
+
+                // this.keywords({
+                //     keywords: response.data.keywords
+                // });
+
+
 
             })
             .catch(error => {
@@ -59,6 +58,10 @@ class Keywords extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+
+        // this.setState({
+        //     inputKeyword : e.target.value
+        // })
     }
 
     // 엔터키 이벤트
@@ -73,23 +76,11 @@ class Keywords extends Component {
         console.log("data :" + data);
         this.setState({
             keywords: this.state.keywords.concat({ id: this.id++, title: this.state.inputKeyword }),
-
-        });
-
-        axios.put('http://localhost:8080/api/user/keyword/add'+'?id=50001&keyWord='+this.state.inputKeyword )
-        .then(function (response) {
-            console.log(response);
-            this.setState({
-                inputKeyword:''
-            });
+            inputKeyword: ''
         })
-        .catch(function (error) {
-            console.log(error);
-        });
-
 
         // information: information.concat({ id: this.id++, ...data })
-        // axios.put("http://localhost:8080/api/user/keyword/add?id=50001&keyWord=안녕하세요");
+
 
     }
 
@@ -121,6 +112,8 @@ class Keywords extends Component {
         const { handleChange, handleKeyPress, handleCreate, handleDelete, handleSubmit } = this;
         const keywordsList = keywords.map(
             (keyword, index) => (
+                console.log("keyword : " + keyword),
+                console.log("index : " + index),
                 // <KeywordsCard key={index} item={keyword}></KeywordsCard>
                 <div key={index} className="container col-5 col-lg-2 mx-auto mb-2">
                     <div style={{ width: '18rem' }}>
@@ -149,7 +142,7 @@ class Keywords extends Component {
                             <h5 className="display-5 font-weight-bold">키워드 등록</h5>
                             <p>키워드를 등록해두면 관련된 기사들을 확인 할 수 있어요.</p>
                             <Link to='#'>혹시 키워드와 관련된 알림이 오지 않나요?</Link>
-                            <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSubmit} method="PUT">
+                            <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSubmit}>
                                 <input className="form-control mr-sm-2" type="search" placeholder="키워드를 입력해주세요." aria-label="Search" name="inputKeyword" value={this.state.inputKeyword} onChange={handleChange} />
                                 <button className="btn btn-outline-primary my-2 my-sm-0" type="button" onClick={handleCreate}>등록</button>
                             </form>
