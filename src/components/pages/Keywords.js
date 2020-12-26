@@ -25,32 +25,25 @@ class Keywords extends Component {
 
 
     async componentDidMount() {
-       await axios.get('https://dog.ceo/api/breeds/image/random')
-            .then(response => {
-                console.log("rio : " + response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        //    await axios.get('https://dog.ceo/api/breeds/image/random')
+        //         .then(response => {
+        //             console.log("rio : " + response.data);
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
 
 
-       await axios.get('http://localhost:8080/api/user/info/' + this.state.userEmail)
+        await axios.get('http://localhost:8080/api/user/info/' + this.state.userEmail)
             .then(response => {
-                console.log("rio : " + response.data);
+                let indexNumber = 0;
 
                 let keywords = response.data.keywords;
-                console.log(keywords);
-                let indexNumber =0;
-                keywords=keywords.map(function(element){return {idx: indexNumber++ ,title:element}});
+                keywords = keywords.map(function (element) {
+                    return { idx: indexNumber++, title: element }
+                });
 
                 this.setState({ keywords });
-
-
-                // this.keywords({
-                //     keywords: response.data.keywords
-                // });
-
-
 
             })
             .catch(error => {
@@ -66,10 +59,6 @@ class Keywords extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-
-        // this.setState({
-        //     inputKeyword : e.target.value
-        // })
     }
 
     // 엔터키 이벤트
@@ -84,11 +73,23 @@ class Keywords extends Component {
         console.log("data :" + data);
         this.setState({
             keywords: this.state.keywords.concat({ id: this.id++, title: this.state.inputKeyword }),
-            inputKeyword: ''
+
+        });
+
+        axios.put('http://localhost:8080/api/user/keyword/add'+'?id=50001&keyWord='+this.state.inputKeyword )
+        .then(function (response) {
+            console.log(response);
+            this.setState({
+                inputKeyword:''
+            });
         })
+        .catch(function (error) {
+            console.log(error);
+        });
+
 
         // information: information.concat({ id: this.id++, ...data })
-
+        // axios.put("http://localhost:8080/api/user/keyword/add?id=50001&keyWord=안녕하세요");
 
     }
 
@@ -120,8 +121,6 @@ class Keywords extends Component {
         const { handleChange, handleKeyPress, handleCreate, handleDelete, handleSubmit } = this;
         const keywordsList = keywords.map(
             (keyword, index) => (
-                console.log("keyword : "+keyword),
-                console.log("index : "+index),
                 // <KeywordsCard key={index} item={keyword}></KeywordsCard>
                 <div key={index} className="container col-5 col-lg-2 mx-auto mb-2">
                     <div style={{ width: '18rem' }}>
@@ -150,7 +149,7 @@ class Keywords extends Component {
                             <h5 className="display-5 font-weight-bold">키워드 등록</h5>
                             <p>키워드를 등록해두면 관련된 기사들을 확인 할 수 있어요.</p>
                             <Link to='#'>혹시 키워드와 관련된 알림이 오지 않나요?</Link>
-                            <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSubmit}>
+                            <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSubmit} method="PUT">
                                 <input className="form-control mr-sm-2" type="search" placeholder="키워드를 입력해주세요." aria-label="Search" name="inputKeyword" value={this.state.inputKeyword} onChange={handleChange} />
                                 <button className="btn btn-outline-primary my-2 my-sm-0" type="button" onClick={handleCreate}>등록</button>
                             </form>
