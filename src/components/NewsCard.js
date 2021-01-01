@@ -1,28 +1,38 @@
 import React, { Component } from 'react'
 import { InfoConsumer } from '../components/context';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+
 
 class NewsCard extends Component {
     render() {
-        const { id, title, text, pagenumber } = this.props.item;
-        // const changedtext = text.replace(/(<([^>]+)>)/ig, '');
+        console.log(this.props.item);
+        const { id, title, text, pagenumber, url } = this.props.item;
+        const changedtext = text.replace(/(<([^>]+)>)/ig, '');
         return (
 
             <InfoConsumer>
                 {value => (
-
-
                     <>
-                        <h5 key={id} className="card-title" >
-                            &nbsp;&nbsp;&nbsp;{title}/{pagenumber}면
-                            </h5>
-                        {/* <p className="card-text">{changedtext}</p> */}
-                        <Link to="/" className="card-link">
+                        <h5 key={id} className="card-title" onClick={() => {
+                            //아래의 p tag 숨김 or 보임
+                            let ptag = document.getElementById(id + '_div');
+                            if (ptag.style.display === 'none') {
+                                ptag.style.display = '';
+                            } else {
+                                ptag.style.display = 'none';
+                            }
 
-                        </Link>
+                        }}>
+                            &nbsp;&nbsp;&nbsp;V {title}/{pagenumber}면
+                        </h5>
+                        <div id={id + '_div'} style={{ display: 'none' }}>
+                            <p className="card-text" id={id + '_content'} >{changedtext}</p>
+                            <Link to={{ pathname: url }} className="card-link" target="_blank"> 기사 원문으로 이동
+                            </Link>
+                        </div>
                     </>
-
-                )}
+                )
+                }
 
             </InfoConsumer>
 

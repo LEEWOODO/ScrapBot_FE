@@ -108,8 +108,9 @@ class News extends Component {
             copy(copyNewsDataList);
           }}
         >
-          기사 제목들만 복사하기 ▶
+          기사 제목들만 복사하기 >
         </Button>
+        <br></br>
         <br></br>
 
         {newcompanies.map((Companyname) => {
