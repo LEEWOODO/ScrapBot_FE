@@ -1,54 +1,19 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { InfoConsumer } from '../context';
+import KeywordsCard from '../KeywordsCard';
+import { Link } from 'react-router-dom';
 
+import Kakao, { getEmail, getEmails, isLogin } from "../../Kakao";
+import { getUserinfoByEmail, deleteKeyword, addKeyword } from "../apis/restApi";
 class Keywords extends Component {
-    constructor(props) {
-        super(props);
+    state = {
 
-        // Quiz 자체에 state를 할당하고, items에 기본값을 줍니다.
-        this.state = {
-            isLogin: false,
-            email: "",
-            userinfo: {},
-            newsResult: [],
-        };
-    }
+        keywords: [
+            "봄", "여름", "가을", "겨울"
 
-    async componentDidMount() {
-        await axios.get('https://dog.ceo/api/breeds/image/random')
-            .then(response => {
-                console.log("rio : " + response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-
-        await axios.get('http://localhost:8080/api/user/info/' + this.state.userEmail)
-            .then(response => {
-                console.log("rio : " + response.data);
-
-                let keywords = response.data.keywords;
-                console.log(keywords);
-                let indexNumber = 0;
-                keywords = keywords.map(function (element) { return { idx: indexNumber++, title: element } });
-
-                this.setState({ keywords });
-
-
-                // this.keywords({
-                //     keywords: response.data.keywords
-                // });
-
-
-
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
+        ],
+        inputKeyword: "",
+        userinfo: {}
     }
 
     // 키워드 변수
@@ -72,33 +37,29 @@ class Keywords extends Component {
     }
 
     // 키워드 추가 
-    handleCreate = (data) => {
-        console.log("data :" + data);
+    handleCreate = (e) => {
+
         this.setState({
-            keywords: this.state.keywords.concat({ id: this.id++, title: this.state.inputKeyword }),
+            keywords: this.state.keywords.concat(this.state.inputKeyword),
             inputKeyword: ''
         })
-
-        // information: information.concat({ id: this.id++, ...data })
-
+        const result = addKeyword(this.state.userinfo.id, this.state.inputKeyword);
 
     }
 
     // 키워드 삭제 
-    handleDelete = (title) => {
-        const { keywords } = this.state;
+    handleDelete = async (i) => {
 
-        alert("delete  title:" + title);
+
+        const result = deleteKeyword(this.state.userinfo.id, this.state.keywords[i]);
+        if (result == true) console.log('delete su')
+        else console.log('delete fa');
         this.setState({
-            keywords: keywords.filter(keyword => keyword.title !== title),
-        });
-
-        // this.setState({
-        //     keywords: [
-        //         ...this.state.keywords.slice(0, i),
-        //         ...this.state.keywords.slice(i+1, this.state.keywords.length)
-        //     ]
-        // })
+            keywords: [
+                ...this.state.keywords.slice(0, i),
+                ...this.state.keywords.slice(i + 1, this.state.keywords.length)
+            ]
+        })
     }
 
     // handleSubmit 이벤트 막기
@@ -107,25 +68,37 @@ class Keywords extends Component {
         this.handleCreate();
     }
 
+    async componentDidMount() {
+        let email = "";
+        const islogin = await isLogin(this);
+        if (islogin) email = await getEmails(this);
+        console.log("in keywords page email");
+        console.log(email);
+        let userinfo = await getUserinfoByEmail(email, this);
+        console.log("userinfo");
+        console.log(userinfo);
+        this.setState({ keywords: userinfo.keywords })
+        // let newsdata = await getNewsData(userinfo.id, this);
+        // this.setState({ newsResult: newsdata });
+    }
+
     render() {
         const { keywords } = this.state;
         const { handleChange, handleKeyPress, handleCreate, handleDelete, handleSubmit } = this;
         const keywordsList = keywords.map(
             (keyword, index) => (
-                console.log("keyword : " + keyword),
-                console.log("index : " + index),
                 // <KeywordsCard key={index} item={keyword}></KeywordsCard>
                 <div key={index} className="container col-5 col-lg-2 mx-auto mb-2">
                     <div style={{ width: '18rem' }}>
                         <div className="card-body">
                             <Link
                                 onClick={() =>
-                                    handleDelete(keyword.title)
+                                    handleDelete(index)
                                 }
                                 className="btn btn-outline-dark"
                             // to='#'
                             >
-                                {keyword.title} &nbsp;<i className="fas fa-times"></i>
+                                {keyword} &nbsp;<i className="fas fa-times"></i>
                             </Link>
                         </div>
                     </div>
@@ -156,11 +129,6 @@ class Keywords extends Component {
 
                             <div className="row mt-5">
                                 {keywordsList}
-                            </div>
-
-                            <div>
-                                결과 : {JSON.stringify(this.state.keywords)}
-
                             </div>
 
                             {/* social icons */}

@@ -13,18 +13,12 @@ function Footer() {
                             <h4>Contact Us</h4>
                             <ul className="list-unstyled">
                                 <li>woodo</li>
-                                <li>woodo</li>
-                                <li>woodo</li>
-                                <li>woodo</li>
                             </ul>
                         </div>
                         {/* column 2 */}
                         <div className="col-md-3 col-sm-6">
                             <h4>woodo king</h4>
                             <ul className="list-unstyled">
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
                                 <li><a href="/">woodo</a></li>
                             </ul>
                         </div>
@@ -33,18 +27,12 @@ function Footer() {
                             <h4>woodo king</h4>
                             <ul className="list-unstyled">
                                 <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
                             </ul>
                         </div>
                         {/* column 4 */}
                         <div className="col-md-3 col-sm-6">
                             <h4>woodo king</h4>
                             <ul className="list-unstyled">
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
-                                <li><a href="/">woodo</a></li>
                                 <li><a href="/">woodo</a></li>
                             </ul>
                         </div>
@@ -58,7 +46,7 @@ function Footer() {
 
                     </div>
                 </div>
-                
+
             </div>
         </FooterContainer>
 

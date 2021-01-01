@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { InfoConsumer } from './context';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
+
+import { getUserinfoByEmail } from "./apis/restApi";
 class KeywordsCard extends Component {
+    constructor(props) {
+        super(props);
+
+        // Quiz 자체에 state를 할당하고, items에 기본값을 줍니다.
+        this.state = {
+            isLogin: false,
+            email: "",
+            userinfo: {},
+            newsResult: [],
+        };
+    }
+
+
+
+
     render() {
 
         // const {
@@ -41,7 +57,7 @@ class KeywordsCard extends Component {
             </InfoConsumer>
         )
     }
-    
+
 }
 
 

@@ -56,24 +56,13 @@ class News extends Component {
     console.log("userinfo");
     console.log(userinfo);
     let newsdata = await getNewsData(userinfo.id, this);
-    let result = await testPost();
+    this.setState({ newsResult: newsdata });
+    //let result = await testPost();
   }
 
   render() {
-    const { isLogin, email, userinfo, newsResult } = this.state;
-    const loginView = (
-      <div>
-        <p>로그인화면</p>
-        <button onClick={this.loginWithKakao}>카카오 로그인</button>
-      </div>
-    );
-    const mainView = (
-      <div>
-        <p>메인 화면{email}</p>
-        <button onClick={this.logoutWithKakao}>카카오 로그아웃</button>
-      </div>
-    );
-    console.log(newsResult);
+    const { newsResult } = this.state;
+
     // console.log("userinfo :" + userinfo.email);
     return (
       <>

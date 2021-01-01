@@ -26,6 +26,7 @@ class Navbar extends Component {
                         success: (auth) => {
                             console.log("정상적으로 로그인 되었습니다.", auth);
                             this.setState({ isLogin: true });
+                            window.location.reload();
                         },
                         fail: (err) => {
                             console.error(err);
@@ -36,6 +37,7 @@ class Navbar extends Component {
         } catch (err) {
             console.error(err);
         }
+
     };
     logoutWithKakao = () => {
         if (Kakao.Auth.getAccessToken()) {
@@ -51,7 +53,7 @@ class Navbar extends Component {
         if (islogin) email = await getEmails(this);
         let userinfo = await getUserinfoByEmail(email, this);
         let newsdata = await getNewsData(userinfo.id, this);
-        let result = await testPost();
+        // let result = await testPost();
     };
     render() {
         const { isLogin, email, userinfo, newsResult } = this.state;
@@ -93,7 +95,7 @@ class Navbar extends Component {
                             <Link className="nav-link text-white text-uppercase ml-5" to="/keywords">키워드 설정</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link text-white text-uppercase ml-5" to="/">신문사 설정</Link>
+                            <Link className="nav-link text-white text-uppercase ml-5" to="/news-config">신문사 설정</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link text-white text-uppercase ml-5" to="/contacts">Contact Us</Link>

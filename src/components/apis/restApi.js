@@ -12,15 +12,42 @@ const getUserinfoByEmail = async (email, component) => {
     return data.data;
 };
 
+//신문사 정보 가져오는 함수
+const getNewsCompanies = async () => {
+    console.log('excute get newscompanies info');
+    const html = 'http://localhost:8080/api/company-list';
+    let { data } = await axios.get(html);
+    console.log(data);
+    return data;
+}
+
 const getNewsData = async (id, component) => {
     const todayDate = new Date();
     const todayDateString = todayDate.getFullYear() + '' + (todayDate.getMonth() + 1) + '' + (todayDate.getDate());
     const html = 'http://localhost:8080/api/user/contents/' + id + '/20201108';
     console.log("html");
     console.log(html);
-    const { data } = await axios.get(html);
-    component.setState({ newsResult: data });
+    let { data } = await axios.get(html);
+    // component.setState({ newsResult: data });
     return data;
+}
+
+const deleteKeyword = async (id, keyword) => {
+    const html = 'http://localhost:8080/api/user/keyword/delete?id=' + id + '&keyWord=' + keyword;
+
+    const result = await axios.put(html);
+    console.log("result");
+    console.log(result);
+    return result;
+}
+
+const addKeyword = async (id, keyword) => {
+    const html = 'http://localhost:8080/api/user/keyword/add?id=' + id + '&keyWord=' + keyword;
+    console.log(html);
+    const result = await axios.put(html);
+    console.log("result");
+    console.log(result);
+    return result;
 }
 
 const testPost = async () => {
@@ -30,4 +57,4 @@ const testPost = async () => {
     return result;
 }
 
-export { getUserinfoByEmail, getNewsData, testPost };
+export { getUserinfoByEmail, getNewsData, testPost, deleteKeyword, addKeyword, getNewsCompanies };
