@@ -10,10 +10,9 @@ class Info extends Component {
             headerTitle,
             headerSubTitle,
             headerText,
-            title,
-            description,
+
             img,
-            maps
+
         } = this.props.item;
 
         return (

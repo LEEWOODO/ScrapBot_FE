@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { InfoConsumer } from '../context';
-import KeywordsCard from '../KeywordsCard';
+
 import { Link } from 'react-router-dom';
 
-import Kakao, { getEmail, getEmails, isLogin } from "../../Kakao";
+import { getEmails, isLogin } from "../../Kakao";
 import { getUserinfoByEmail, deleteKeyword, addKeyword } from "../apis/restApi";
 class Keywords extends Component {
     state = {
@@ -52,8 +52,7 @@ class Keywords extends Component {
 
 
         const result = deleteKeyword(this.state.userinfo.id, this.state.keywords[i]);
-        if (result == true) console.log('delete su')
-        else console.log('delete fa');
+        if (result === true) { }
         this.setState({
             keywords: [
                 ...this.state.keywords.slice(0, i),
@@ -72,14 +71,9 @@ class Keywords extends Component {
         let email = "";
         const islogin = await isLogin(this);
         if (islogin) email = await getEmails(this);
-        console.log("in keywords page email");
-        console.log(email);
         let userinfo = await getUserinfoByEmail(email, this);
-        console.log("userinfo");
-        console.log(userinfo);
         this.setState({ keywords: userinfo.keywords })
-        // let newsdata = await getNewsData(userinfo.id, this);
-        // this.setState({ newsResult: newsdata });
+
     }
 
     render() {

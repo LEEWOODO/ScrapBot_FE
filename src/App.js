@@ -13,7 +13,6 @@ import Contacts from './components/pages/Contacts';
 import Details from './components/pages/Details';
 import NotFoundPage from './components/pages/NotFoundPage';
 import Keywords from './components/pages/Keywords';
-import Kakao from './Kakao'
 import News from './components/pages/News';
 import NewsSelect from './components/pages/NewsSelect.jsx';
 

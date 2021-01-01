@@ -59,14 +59,14 @@ class Navbar extends Component {
         const { isLogin, email, userinfo, newsResult } = this.state;
         const { logoutWithKakao, loginWithKakao } = this;
         const loginView = (
-            <ul class="nav navbar-nav navbar-right">
+            <ul className="nav navbar-nav navbar-right">
                 <li><a href="#" onClick={() =>
                     logoutWithKakao()
                 }>{email}</a></li>
             </ul>
         );
         const notLogin = (
-            <ul class="nav navbar-nav navbar-right">
+            <ul className="nav navbar-nav navbar-right">
                 <li><a href="#" onClick={() =>
                     loginWithKakao()
                 }>로그인</a></li>

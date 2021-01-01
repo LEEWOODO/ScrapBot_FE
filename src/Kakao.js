@@ -12,14 +12,12 @@ const isLogin = (component) => {
 }
 
 const getEmail = (component) => {
-    console.log(component);
     try {
-        let resultEmail = '';
+
         return new Promise((resolve, reject) => {
             if (!window.Kakao) {
                 reject("kakao 인스턴스가 없음.");
             } else {
-                console.log(component);
                 window.Kakao.API.request({
                     url: "/v2/user/me",
                     success: function (res) {
@@ -55,8 +53,6 @@ async function getEmails(component) {
 
         },
     });
-    //console.log("resultItems")
-    // console.log(resultItems); // [1,2,3]
     return resultItems.kakao_account.email;
 }
 

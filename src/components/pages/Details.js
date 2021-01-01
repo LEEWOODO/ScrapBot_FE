@@ -9,7 +9,7 @@ class Details extends Component {
             <InfoConsumer>
                 {data => {
                     const {
-                        id,
+
                         headerTitle,
                         headerSubTitle,
                         headerText,
@@ -95,7 +95,7 @@ class Details extends Component {
                                                 border: '0',
                                                 height: '28.125rem',
                                                 width: '100%',
-                                                frameborder : '0'
+                                                frameborder: '0'
                                             }}
                                         >
                                         </iframe>

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import NewsCard from "../NewsCard";
-import { InfoConsumer } from "../context";
-import Kakao, { getEmail, getEmails, isLogin } from "../../Kakao";
-import axios from "axios";
-import { getNewsData, getUserinfoByEmail, testPost } from "../apis/restApi";
+
+import Kakao, { getEmails, isLogin } from "../../Kakao";
+
+import { getNewsData, getUserinfoByEmail } from "../apis/restApi";
+import copy from "copy-to-clipboard";
+import Button from "react-bootstrap/Button";
+// import clipboardImg from "../../../public/images/clipboard.svg";
 class News extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +16,19 @@ class News extends Component {
       isLogin: false,
       email: "",
       userinfo: {},
-      newsResult: [],
+      newsResult: [
+        {
+          id: 0,
+          newcompany: "",
+          newscompanyId: "",
+          pagenumber: "",
+          regdate: "",
+          text: "",
+          title: "",
+          topornot: true,
+          url: "",
+        },
+      ],
     };
   }
 
@@ -50,27 +65,67 @@ class News extends Component {
     let email = "";
     const islogin = await isLogin(this);
     if (islogin) email = await getEmails(this);
-    console.log("email");
-    console.log(email);
     let userinfo = await getUserinfoByEmail(email, this);
-    console.log("userinfo");
-    console.log(userinfo);
     let newsdata = await getNewsData(userinfo.id, this);
     this.setState({ newsResult: newsdata });
-    //let result = await testPost();
   }
 
   render() {
     const { newsResult } = this.state;
 
-    // console.log("userinfo :" + userinfo.email);
+    const newcompanies = Array.from(
+      new Set(newsResult.map((news) => news.newcompany))
+    );
+    Array.from(new Set(newcompanies));
+
     return (
       <>
-        {/* <div>{isLogin ? mainView : loginView}</div>; */}
-        {newsResult.map((news) => {
-          console.log("news");
-          console.log(news);
-          return <NewsCard key={news.id} item={news}></NewsCard>;
+        <Button
+          key={0}
+          variant="primary"
+          className="float-right"
+          onClick={() => {
+            alert("기사 제목이 복사되었습니다.");
+
+            let companyTitle = "";
+            const copyNewsDataList = newsResult
+              .map((news) => {
+                let copyNewsData = "";
+                if (companyTitle !== news.newcompany) {
+                  companyTitle = news.newcompany;
+                  copyNewsData += "▶" + news.newcompany + "\n";
+                }
+                copyNewsData +=
+                  "\t" +
+                  news.title +
+                  " " +
+                  news.pagenumber +
+                  (news.topornot ? " 톱" : "") +
+                  "\n";
+                return copyNewsData;
+              })
+              .reduce((prev, curr) => prev + curr);
+            copy(copyNewsDataList);
+          }}
+        >
+          기사 제목들만 복사하기 ▶
+        </Button>
+        <br></br>
+
+        {newcompanies.map((Companyname) => {
+          return (
+            <>
+              <div className="card container mt-2 mb-2 p-1">
+                <div className="card-body">
+                  <h2>{Companyname}</h2>
+                  {newsResult.map((news) => {
+                    if (Companyname === news.newcompany)
+                      return <NewsCard key={news.id} item={news}></NewsCard>;
+                  })}
+                </div>
+              </div>
+            </>
+          );
         })}
       </>
     );

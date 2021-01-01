@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import NewsCard from "../NewsCard";
-import { InfoConsumer } from "../context";
-import Kakao, { getEmail, getEmails, isLogin } from "../../Kakao";
-import axios from "axios";
-import {
-  getNewsData,
-  getUserinfoByEmail,
-  testPost,
-  getNewsCompanies,
-} from "../apis/restApi";
-
+import { getEmails, isLogin } from "../../Kakao";
+import { addNewdCompany, subNewdCompany } from "../apis/restApi";
+import { getUserinfoByEmail, getNewsCompanies } from "../apis/restApi";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 class NewsSelect extends Component {
   constructor(props) {
     super(props);
@@ -17,32 +10,64 @@ class NewsSelect extends Component {
     this.state = {
       isLogin: false,
       email: "",
-      userinfo: {},
+      userinfo: {
+        newsCompanySet: [],
+      },
       companies: [],
     };
   }
 
   async componentDidMount() {
     let result = await getNewsCompanies();
-    console.log(result);
     this.setState({ companies: result });
     let email = "";
     const islogin = await isLogin(this);
     if (islogin) email = await getEmails(this);
-    console.log("in keywords page email");
-    console.log(email);
     let userinfo = await getUserinfoByEmail(email, this);
-    console.log("userinfo");
-    console.log(userinfo);
     this.setState({ keywords: userinfo.keywords });
   }
 
   render() {
-    const { companies } = this.state;
+    const { companies, userinfo } = this.state;
+    const userhaveCompanies = userinfo.newsCompanySet.map(
+      (companyObj) => companyObj.companyName
+    );
     const printCompanyList = companies.map((company, index) => (
-      <div>{company.companyName}</div>
+      <>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <label>{company.companyName}</label>
+            </div>
+            <div class="col">
+              <BootstrapSwitchButton
+                checked={userhaveCompanies.includes(company.companyName)}
+                size="sm"
+                onstyle="primary"
+                offstyle="info"
+                onChange={(checked) => {
+                  if (checked === false) {
+                    // 신문사 제외 프로세스 실행
+                    subNewdCompany(company.id, userinfo.id);
+                  } else {
+                    // 신문사 추가 프로세스 실행
+                    addNewdCompany(company.id, userinfo.id);
+                  }
+                }}
+                onlabel={"ON"}
+                offlabel={"OFF"}
+                width={50}
+              />
+            </div>
+          </div>
+        </div>
+      </>
     ));
-    return <div>{printCompanyList}</div>;
+    return (
+      <>
+        <div>{printCompanyList}</div>
+      </>
+    );
   }
 }
 
