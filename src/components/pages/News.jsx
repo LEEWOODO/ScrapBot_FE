@@ -1,11 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import NewsCard from "../NewsCard";
 
 import Kakao, { getEmails, isLogin } from "../../Kakao";
 
-import { getNewsData, getUserinfoByEmail } from "../apis/restApi";
+import {
+  getNewsData,
+  getUserinfoByEmail,
+  getNewsDataByDate,
+} from "../apis/restApi";
 import copy from "copy-to-clipboard";
 import Button from "react-bootstrap/Button";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+import "react-datepicker/dist/react-datepicker.css";
 // import clipboardImg from "../../../public/images/clipboard.svg";
 class News extends Component {
   constructor(props) {
@@ -15,7 +22,7 @@ class News extends Component {
     this.state = {
       isLogin: false,
       email: "",
-      userinfo: {},
+      userinfo: { id: 0 },
       newsResult: [
         {
           id: 0,
@@ -29,6 +36,7 @@ class News extends Component {
           url: "",
         },
       ],
+      startDate: new Date(),
     };
   }
 
@@ -69,15 +77,22 @@ class News extends Component {
     let newsdata = await getNewsData(userinfo.id, this);
     this.setState({ newsResult: newsdata });
   }
+  async gettingNewsData(userId, date) {
+    const { userinfo } = this.state;
+    console.log(this.state);
+    let newsdata = await getNewsDataByDate(userinfo.id, date, this);
+    this.setState({ newsResult: newsdata });
+  }
 
   render() {
-    const { newsResult } = this.state;
-
+    const { newsResult, startDate, userinfo } = this.state;
+    // console.log(userinfo);
     const newcompanies = Array.from(
       new Set(newsResult.map((news) => news.newcompany))
     );
     Array.from(new Set(newcompanies));
 
+    // registerLocale("ko", ko);
     return (
       <>
         <Button
@@ -112,7 +127,21 @@ class News extends Component {
         </Button>
         <br></br>
         <br></br>
+        {/* 날짜 추가 부분 시작 - 20210102 */}
+        <div className="d-flex justify-content-center">
+          <h4>&nbsp;날 짜 선 택&nbsp;</h4>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => {
+              console.log(date);
+              this.setState({ startDate: date });
+              this.gettingNewsData(userinfo.id, date);
+            }}
+            locale={ko}
+          />
+        </div>
 
+        {/* 날짜 추가 부분 완성 - 20210102*/}
         {newcompanies.map((Companyname) => {
           return (
             <>

@@ -8,6 +8,7 @@ const getUserinfoByEmail = async (email, component) => {
         'http://localhost:8080/api/user/info/' + email
         // "http://localhost:8080/api/user/info/2c6829%40naver.com"
     );
+    console.log(data.data);
     component.setState({ userinfo: data.data });
     return data.data;
 };
@@ -23,6 +24,26 @@ const getNewsCompanies = async () => {
 
 const getNewsData = async (id, component) => {
     const todayDate = new Date();
+    let month = '', date = '';
+    if ((todayDate.getMonth()) < 9) {
+        month = '0' + (todayDate.getMonth() + 1);
+    } else { month = todayDate.getMonth() + 1; }
+    if ((todayDate.getDate()) < 10) {
+        date = '0' + (todayDate.getDate());
+    } else { date = todayDate.getDate(); }
+
+    const todayDateString = todayDate.getFullYear() + '' + (month) + '' + (date);
+    console.log(todayDateString);
+    const url = 'http://localhost:8080/api/user/contents/' + id + '/' + todayDateString;
+
+    console.log(url);
+    let { data } = await axios.get(url);
+
+    return data;
+}
+
+const getNewsDataByDate = async (id, date1, component) => {
+    const todayDate = date1;
     let month = '', date = '';
     if ((todayDate.getMonth()) < 9) {
         month = '0' + (todayDate.getMonth() + 1);
@@ -75,4 +96,4 @@ const subNewdCompany = async (companyid, userid) => {
     return result;
 }
 
-export { getUserinfoByEmail, getNewsData, testPost, deleteKeyword, addKeyword, getNewsCompanies, addNewdCompany, subNewdCompany };
+export { getUserinfoByEmail, getNewsData, testPost, deleteKeyword, addKeyword, getNewsCompanies, addNewdCompany, subNewdCompany, getNewsDataByDate };
