@@ -80,25 +80,26 @@ class Keywords extends Component {
         const { keywords } = this.state;
         const { handleChange, handleKeyPress, handleCreate, handleDelete, handleSubmit } = this;
         const keywordsList = keywords.map(
-            (keyword, index) => (
-                // <KeywordsCard key={index} item={keyword}></KeywordsCard>
-                <div key={index} className="container col-5 col-lg-2 mx-auto mb-2">
-                    <div style={{ width: '18rem' }}>
-                        <div className="card-body">
-                            <Link
-                                onClick={() =>
-                                    handleDelete(index)
-                                }
-                                className="btn btn-outline-dark"
-                            // to='#'
-                            >
-                                {keyword} &nbsp;<i className="fas fa-times"></i>
-                            </Link>
+            (keyword, index) => {
+                console.log(keyword);
+                return (
+                    <div key={index} className="container col-5 col-lg-2 mx-auto mb-2">
+                        <div style={{ width: '18rem' }}>
+                            <div className="card-body">
+                                <Link
+                                    onClick={() =>
+                                        handleDelete(index)
+                                    }
+                                    className="btn btn-outline-dark"
+                                >
+                                    {keyword} &nbsp;<i className="fas fa-times"></i>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            )
+                    </div>
+                );
+            }
         );
         return (
             <InfoConsumer>
