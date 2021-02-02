@@ -66,14 +66,15 @@ class Navbar extends Component {
             <ul className="nav navbar-nav navbar-right">
                 <li><a href="#" onClick={() =>
                     logoutWithKakao()
-                }>{email}</a></li>
+                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span>{email}</span></a></li>
             </ul>
         );
+
         const notLogin = (
-            <ul className="nav navbar-nav navbar-right">
+            <ul className="nav navbar-nav navbar-right" >
                 <li><a href="#" onClick={() =>
                     loginWithKakao()
-                }>로그인</a></li>
+                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span>로그인</span></a></li>
             </ul>
         )
         return (
