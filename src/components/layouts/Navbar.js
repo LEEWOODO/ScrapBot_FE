@@ -78,11 +78,13 @@ class Navbar extends Component {
         )
         return (
             <>
-                <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+                <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
                     <Link className="navbar-brand ml-5" to="/">
-                        <img src={logo} alt="logo" style={{ width: '35px' }}></img>
+                        {/* <img src={logo} alt="logo" style={{ width: '35px' }}></img> */}
+                        <h3>SCRAPBOT</h3>
                     </Link>
-                    <div>{isLogin ? loginView : notLogin}</div>
+
+                    <div className="nav navbar-nav navbar-right">{isLogin ? loginView : notLogin}</div>
                 </nav>
                 <nav className="navbar navbar-expand-lg navbar-light bg-dark">
                     {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

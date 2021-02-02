@@ -40,35 +40,35 @@ class News extends Component {
     };
   }
 
-  loginWithKakao = () => {
-    try {
-      return new Promise((resolve, reject) => {
-        if (!Kakao) {
-          reject("Kakao 인스턴스가 존재하지 않습니다.");
-        } else {
-          Kakao.Auth.login({
-            success: (auth) => {
-              console.log("정상적으로 로그인 되었습니다.", auth);
-              this.setState({ isLogin: true });
-            },
-            fail: (err) => {
-              console.error(err);
-            },
-          });
-        }
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  logoutWithKakao = () => {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.Auth.logout(() => {
-        console.log("로그아웃 되었습니다", Kakao.Auth.getAccessToken());
-        this.setState({ isLogin: false, email: "" });
-      });
-    }
-  };
+  // loginWithKakao = () => {
+  //   try {
+  //     return new Promise((resolve, reject) => {
+  //       if (!Kakao) {
+  //         reject("Kakao 인스턴스가 존재하지 않습니다.");
+  //       } else {
+  //         Kakao.Auth.login({
+  //           success: (auth) => {
+  //             console.log("정상적으로 로그인 되었습니다.", auth);
+  //             this.setState({ isLogin: true });
+  //           },
+  //           fail: (err) => {
+  //             console.error(err);
+  //           },
+  //         });
+  //       }
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  // logoutWithKakao = () => {
+  //   if (Kakao.Auth.getAccessToken()) {
+  //     Kakao.Auth.logout(() => {
+  //       console.log("로그아웃 되었습니다", Kakao.Auth.getAccessToken());
+  //       this.setState({ isLogin: false, email: "" });
+  //     });
+  //   }
+  // };
   async componentDidMount() {
     let email = "";
     const islogin = await isLogin(this);
