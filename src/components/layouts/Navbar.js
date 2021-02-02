@@ -25,11 +25,14 @@ class Navbar extends Component {
                 } else {
                     Kakao.Auth.login({
                         success: (auth) => {
-                            console.log("정상적으로 로그인 되었습니다.", auth);
-                            this.setState({ isLogin: true });
-                            window.location.reload();
+                            Kakao.Auth.authorize({
+                                redirectUri: "http://www.scrapbot.co.kr/"
+                            });
                         },
                         fail: (err) => {
+                            Kakao.Auth.authorize({
+                                edirectUri: "http://www.scrapbot.co.kr/"
+                            });
                             console.error(err);
                         },
                     });
