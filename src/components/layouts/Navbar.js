@@ -31,7 +31,7 @@ class Navbar extends Component {
                         },
                         fail: (err) => {
                             Kakao.Auth.authorize({
-                                edirectUri: "http://www.scrapbot.co.kr/"
+                                redirectUri: "http://www.scrapbot.co.kr/"
                             });
                             console.error(err);
                         },
