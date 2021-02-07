@@ -7,14 +7,15 @@ import Kakao from "../../Kakao";
 
 class Home extends Component {
     componentWillMount() {
+
+    }
+    render() {
         const { search } = this.props.location;
         const queryObj = queryString.parse(search);
         const { code } = queryObj;
         console.log(code);
         Kakao.Auth.setAccessToken(code);
         console.log(Kakao.Auth.getAccessToken());
-    }
-    render() {
         return (
             <div className="container">
                 <div className="row mt-5">
