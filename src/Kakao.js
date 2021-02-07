@@ -44,21 +44,28 @@ const getEmail = (component) => {
 }
 
 async function getEmails(component) {
-    var resultItems = await window.Kakao.API.request({
-        url: "/v2/user/me",
-        success: function (res) {
-            let email = res.kakao_account.email;
-            component.setState({ email: email });
+    if (window.Kakao.Auth.getAccessToken()) {
+        var resultItems = await window.Kakao.API.request({
+            url: "/v2/user/me",
+            success: function (res) {
+                let email = res.kakao_account.email;
+                component.setState({ email: email });
 
-        },
-        fail: function (error) {
-            alert("<getEmails>maybe here i think" + error);
-            window.Kakao.Auth.authorize({
-                redirectUri: "http://www.scrapbot.co.kr/"
-            });
+            },
+            fail: function (error) {
+                alert("<getEmails>maybe here i think" + error);
+                window.Kakao.Auth.authorize({
+                    redirectUri: "http://www.scrapbot.co.kr/"
+                });
 
-        },
-    });
+            },
+        });
+    } else {
+        window.Kakao.Auth.authorize({
+            redirectUri: "http://www.scrapbot.co.kr/"
+        });
+    }
+
     return resultItems.kakao_account.email;
 }
 
