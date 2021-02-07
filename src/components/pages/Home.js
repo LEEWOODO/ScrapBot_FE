@@ -19,6 +19,7 @@ class Home extends Component {
         // console.log(code);
         // Kakao.Auth.setAccessToken(code);
         // console.log(Kakao.Auth.getAccessToken());
+        const { getCookie } = this;
         const token = getCookie('authorize-access-token')
         if (token) {
             Kakao.Auth.setAccessToken(token)
