@@ -13,12 +13,12 @@ class Home extends Component {
     // }
 
     render() {
-        const { search } = this.props.location;
-        const queryObj = queryString.parse(search);
-        const { code } = queryObj;
-        console.log(code);
-        Kakao.Auth.setAccessToken(code);
-        console.log(Kakao.Auth.getAccessToken());
+        // const { search } = this.props.location;
+        // const queryObj = queryString.parse(search);
+        // const { code } = queryObj;
+        // console.log(code);
+        // Kakao.Auth.setAccessToken(code);
+        // console.log(Kakao.Auth.getAccessToken());
         // const { getCookie } = this;
         // const token = getCookie('authorize-access-token')
         // if (token) {
