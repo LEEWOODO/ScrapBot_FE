@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { InfoConsumer } from '../context'
 import Info from '../Info';
-import queryStirng from 'query-string'
+import queryString from 'query-string'
 import Kakao from "../../Kakao";
 
 
 class Home extends Component {
-    componentWillMount() {
 
-    }
     render() {
         const { search } = this.props.location;
         const queryObj = queryString.parse(search);
