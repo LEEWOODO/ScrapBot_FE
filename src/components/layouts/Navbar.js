@@ -30,8 +30,7 @@ class Navbar extends Component {
                             });
                         },
                         fail: (err) => {
-                            alert(err);
-
+                            alert("<loginWithKakao>" + err);
                             Kakao.Auth.authorize({
                                 redirectUri: "http://www.scrapbot.co.kr/"
                             });

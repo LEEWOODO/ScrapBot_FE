@@ -25,7 +25,7 @@ const getEmail = (component) => {
                         component.setState({ email: email });
                     },
                     fail: function (error) {
-                        console.log("maybe here i think" + error);
+                        console.log("<getEmail>maybe here i think" + error);
                         window.Kakao.Auth.authorize({
                             redirectUri: "http://www.scrapbot.co.kr/"
                         });
@@ -52,7 +52,7 @@ async function getEmails(component) {
 
         },
         fail: function (error) {
-            alert("maybe here i think" + error);
+            alert("<getEmails>maybe here i think" + error);
             window.Kakao.Auth.authorize({
                 redirectUri: "http://www.scrapbot.co.kr/"
             });
