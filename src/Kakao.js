@@ -56,8 +56,8 @@ async function getEmails(component) {
             fail: function (error) {
                 alert("<getEmails>maybe here i think" + error);
                 window.Kakao.cleanup();
-                window.Kakao.init('a5d849c953431eac1be8eb9281ed893b');
                 window.Kakao.Auth.cleanup();
+                window.Kakao.init('a5d849c953431eac1be8eb9281ed893b');
                 window.Kakao.Auth.authorize({
                     redirectUri: "http://www.scrapbot.co.kr/"
                 });
