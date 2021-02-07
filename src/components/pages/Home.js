@@ -22,7 +22,15 @@ class Home extends Component {
         const { getCookie } = this;
         const token = getCookie('authorize-access-token')
         if (token) {
+            console.log("token:" + token);
             Kakao.Auth.setAccessToken(token)
+            Kakao.Auth.getStatusInfo(({ status }) => {
+                if (status === 'connected') {
+                    document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+                } else {
+                    Kakao.Auth.setAccessToken(null)
+                }
+            })
         }
 
         return (
