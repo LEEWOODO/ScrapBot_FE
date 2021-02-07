@@ -44,6 +44,7 @@ const getEmail = (component) => {
 }
 
 async function getEmails(component) {
+
     if (window.Kakao.Auth.getAccessToken()) {
         var resultItems = await window.Kakao.API.request({
             url: "/v2/user/me",
@@ -54,6 +55,7 @@ async function getEmails(component) {
             },
             fail: function (error) {
                 alert("<getEmails>maybe here i think" + error);
+                window.Kakao.Auth.cleanup();
                 window.Kakao.Auth.authorize({
                     redirectUri: "http://www.scrapbot.co.kr/"
                 });
