@@ -30,10 +30,11 @@ class Navbar extends Component {
                             });
                         },
                         fail: (err) => {
+                            alert(err);
+
                             Kakao.Auth.authorize({
                                 redirectUri: "http://www.scrapbot.co.kr/"
                             });
-                            console.error(err);
                         },
                     });
                 }
