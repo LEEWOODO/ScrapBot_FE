@@ -7,6 +7,7 @@ import {
   getNewsData,
   getUserinfoByEmail,
   getNewsDataByDate,
+  getNewsCompanies,
 } from "../apis/restApi";
 import copy from "copy-to-clipboard";
 import Button from "react-bootstrap/Button";
@@ -38,6 +39,15 @@ class News extends Component {
       ],
       startDate: new Date(),
       isNoKeyword: 0, //if loading -0, nokeyword -3, keywordExsit -1
+      totalCompanyList: [
+        "조선일보",
+        "중앙일보",
+        "동아일보",
+        "매일경제",
+        "한국경제",
+        "서울경제",
+        "머니투데이",
+      ],
     };
   }
 
@@ -46,11 +56,26 @@ class News extends Component {
     const islogin = await isLogin(this);
     if (islogin) email = await getEmails(this);
     let userinfo = await getUserinfoByEmail(email, this);
+    let emtpyResult = await this.filterSelectedCompany();
     let newsdata = await getNewsData(userinfo.id, this);
     this.setState({ newsResult: newsdata });
 
     this.checkKeyWordsLength(userinfo.keywords);
   }
+
+  async filterSelectedCompany() {
+    let { totalCompanyList } = this.state;
+    const { newsCompanySet } = this.state.userinfo;
+    const selectedCompanies = newsCompanySet.map(
+      (companyObj) => companyObj.companyName
+    );
+    totalCompanyList = totalCompanyList.filter((newsCompayName) =>
+      selectedCompanies.includes(newsCompayName)
+    );
+    this.setState({ totalCompanyList });
+    return 1;
+  }
+
   async gettingNewsData(userId, date) {
     const { userinfo } = this.state;
 
@@ -68,12 +93,17 @@ class News extends Component {
   };
 
   render() {
-    const { newsResult, startDate, userinfo, isNoKeyword } = this.state;
+    const {
+      newsResult,
+      startDate,
+      userinfo,
+      isNoKeyword,
+      totalCompanyList,
+    } = this.state;
     // console.log(userinfo);
-    const newcompanies = Array.from(
+    const newcompaniesSetByDate = Array.from(
       new Set(newsResult.map((news) => news.newcompany))
     );
-    Array.from(new Set(newcompanies));
 
     // registerLocale("ko", ko);
     if (isNoKeyword === 1) {
@@ -126,16 +156,30 @@ class News extends Component {
           </div>
 
           {/* 날짜 추가 부분 완성 - 20210102*/}
-          {newcompanies.map((Companyname) => {
+
+          {totalCompanyList.map((Companyname) => {
             return (
               <>
                 <div className="card container mt-2 mb-2 p-1">
                   <div className="card-body">
                     <div style={{ fontSize: "15px" }}>▶{Companyname}</div>
-                    {newsResult.map((news) => {
-                      if (Companyname === news.newcompany)
-                        return <NewsCard key={news.id} item={news}></NewsCard>;
-                    })}
+                    {newcompaniesSetByDate.includes(Companyname) ? (
+                      newsResult
+                        .filter((news) => news.newcompany === Companyname)
+                        .map((news) => (
+                          <NewsCard key={news.id} item={news}></NewsCard>
+                        ))
+                    ) : (
+                      <>
+                        <div
+                          className="card-title"
+                          style={{ fontSize: "13px" }}
+                        >
+                          &nbsp;&nbsp;&nbsp; 입력된 키워드에 해당하는 기사가
+                          없습니다.
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </>
