@@ -21,7 +21,7 @@ class News extends Component {
 
     // Quiz 자체에 state를 할당하고, items에 기본값을 줍니다.
     this.state = {
-      isLogin: false,
+      islogin: false,
       email: "",
       userinfo: { id: 0 },
       newsResult: [
@@ -107,17 +107,18 @@ class News extends Component {
     );
 
     // registerLocale("ko", ko);
+    console.log("islogin" + islogin);
     if (islogin === false)
       return (
         <>
           <div className="card container mt-2 mb-2 p-1">
             <div className="card-body">
-              <h3>먼저 로그인 해야합니다.</h3>
+              <h3>로그인이 필요합니다.</h3>
               <br />
-              <h4>
+              <h5>
                 메뉴 우측 상단에서 <br />
                 로그인 버튼을 눌러 로그인을 진행해주세요
-              </h4>
+              </h5>
             </div>
           </div>
         </>
