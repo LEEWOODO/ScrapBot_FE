@@ -153,7 +153,7 @@ class News extends Component {
               <br />
               <h4>
                 '키워드 설정' 페이지에서 <br />
-                검색하실 키워드들을 등록해주세요
+                필요한 키워드들을 등록해주세요
               </h4>
               <Link to="/keywords" className="card-link">
                 <h5>키워드 설정 바로가기</h5>
