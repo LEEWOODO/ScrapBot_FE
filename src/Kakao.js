@@ -7,6 +7,9 @@ const isLogin = (component) => {
         return true;
     } else {
         component.setState({ isLogin: false });
+        window.Kakao.Auth.authorize({
+            redirectUri: "http://www.scrapbot.co.kr/"
+        });
         return false;
     }
 }

@@ -98,7 +98,7 @@ class News extends Component {
       startDate,
       userinfo,
       isNoKeyword,
-      totalCompanyList,
+      totalCompanyList,islogin
     } = this.state;
     // console.log(userinfo);
     const newcompaniesSetByDate = Array.from(
@@ -106,6 +106,21 @@ class News extends Component {
     );
 
     // registerLocale("ko", ko);
+    if(islogin===false){
+      return( <>
+        <div className="card container mt-2 mb-2 p-1">
+          <div className="card-body">
+            <h3>먼저 로그인 해야합니다.</h3>
+            <br />
+            <h4>
+              메뉴 우측 상단에서 <br />
+              로그인 버튼을 눌러 로그인을 진행해주세요
+            </h4>
+          </div>
+        </div>
+      </>;
+    }
+
     if (isNoKeyword === 1) {
       return (
         <>
