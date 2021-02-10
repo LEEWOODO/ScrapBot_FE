@@ -129,7 +129,7 @@ class News extends Component {
         <br></br>
         {/* 날짜 추가 부분 시작 - 20210102 */}
         <div className="d-flex justify-content-center">
-          <div style={{ fontSize: "11px" }}>&nbsp;날 짜 선 택&nbsp;</div>
+          <div style={{ fontSize: "15px" }}>&nbsp;날 짜 선 택&nbsp;</div>
           <DatePicker
             selected={startDate}
             onChange={(date) => {
@@ -147,7 +147,7 @@ class News extends Component {
             <>
               <div className="card container mt-2 mb-2 p-1">
                 <div className="card-body">
-                  <div style={{ fontSize: "11px" }}>{Companyname}</div>
+                  <div style={{ fontSize: "15px" }}>▶{Companyname}</div>
                   {newsResult.map((news) => {
                     if (Companyname === news.newcompany)
                       return <NewsCard key={news.id} item={news}></NewsCard>;

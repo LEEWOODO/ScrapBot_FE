@@ -22,11 +22,11 @@ class NewsCard extends Component {
                                 ptag.style.display = 'none';
                             }
 
-                        }} style={{ fontSize: '11px' }}>
-                            &nbsp;&nbsp;&nbsp;V {title}/{pagenumber}면
+                        }} style={{ fontSize: '13px' }}>
+                            &nbsp;&nbsp;&nbsp; {title}/{pagenumber}면
                         </div>
                         <div id={id + '_div'} style={{ display: 'none' }}>
-                            <p className="card-text" id={id + '_content'} style={{ fontSize: '9px' }}>{changedtext}</p>
+                            <p className="card-text" id={id + '_content'} style={{ fontSize: '12px' }}>{changedtext}</p>
                             <Link to={{ pathname: url }} className="card-link" target="_blank"> 기사 원문으로 이동
                             </Link>
                         </div>

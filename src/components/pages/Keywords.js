@@ -127,7 +127,7 @@ class Keywords extends Component {
                             </div>
 
                             {/* social icons */}
-                            <div className="mt-5">
+                            {/* <div className="mt-5">
                                 <div className="row justify-content-center">
                                     <div className="col-2">
                                         <i className="fab fa-facebook-f"></i>
@@ -148,7 +148,7 @@ class Keywords extends Component {
                                         <i className="fab fa-facebook-messenger"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     )
                 }}
