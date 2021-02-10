@@ -105,7 +105,9 @@ const getToken = (code) => {
         },
         method: "POST"
     })
-        .then((response) => console.log("response:", response))
+        .then((response) => alert(response))
+    // const { getCookie } = this;
+    // const token = getCookie('authorize-access-token')
 
 }
 
