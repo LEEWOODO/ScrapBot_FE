@@ -180,7 +180,7 @@ class News extends Component {
               <>
                 <div className="card container mt-2 mb-2 p-1">
                   <div className="card-body">
-                    <div style={{ fontSize: "15px" }}>▶{Companyname}</div>
+                    <div style={{ fontSize: "40px" }}>▶{Companyname}</div>
                     {newcompaniesSetByDate.includes(Companyname) ? (
                       newsResult
                         .filter((news) => news.newcompany === Companyname)
