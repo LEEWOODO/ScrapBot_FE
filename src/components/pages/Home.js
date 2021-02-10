@@ -15,7 +15,7 @@ class Home extends Component {
         //code값이 존재 할 경우
         if (code !== null || code !== '') {
             //토큰 새로 발급
-            getToken();
+            getToken(code);
         }
 
         // if (token) {
