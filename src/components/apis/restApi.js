@@ -105,9 +105,23 @@ const getToken = (code) => {
         },
         method: "POST"
     })
-        .then((response) => alert(response))
+        .then((response) => {
+            Kakao.Auth.setAccessToken(response.access_token);
+            alert(response.access_token)
+        })
     // const { getCookie } = this;
     // const token = getCookie('authorize-access-token')
+    // if (token) {
+    //     console.log("token:" + token);
+    //     Kakao.Auth.setAccessToken(token)
+    //     Kakao.Auth.getStatusInfo(({ status }) => {
+    //         if (status === 'connected') {
+    //             document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+    //         } else {
+    //             Kakao.Auth.setAccessToken(null)
+    //         }
+    //     })
+    // }
 
 }
 
