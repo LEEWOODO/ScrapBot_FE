@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import { InfoConsumer } from '../context'
 import Info from '../Info';
-
+import queryString from 'query-string'
 import Kakao from "../../Kakao";
 import { getToken } from '../apis/restApi';
 
 
 class Home extends Component {
-    // getCookie = (name) => {
-    //     const value = "; " + document.cookie;
-    //     const parts = value.split("; " + name + "=");
-    //     if (parts.length === 2) return parts.pop().split(";").shift();
-    // }
-
     render() {
 
         const { search } = this.props.location;
@@ -23,8 +17,7 @@ class Home extends Component {
             //토큰 새로 발급
             getToken();
         }
-        // const { getCookie } = this;
-        // const token = getCookie('authorize-access-token')
+
         // if (token) {
         //     console.log("token:" + token);
         //     Kakao.Auth.setAccessToken(token)
