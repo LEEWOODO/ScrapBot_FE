@@ -15,7 +15,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import Keywords from './components/pages/Keywords';
 import News from './components/pages/News';
 import NewsSelect from './components/pages/NewsSelect.jsx';
-import login from './components/apis/ouath/login';
+
 
 
 // 자동정렬 : 시프트 + 옵션 + F
