@@ -58,7 +58,6 @@ async function getEmails(component) {
                 window.Kakao.Auth.authorize({
                     redirectUri: "http://www.scrapbot.co.kr/"
                 });
-
             },
         });
     } else {

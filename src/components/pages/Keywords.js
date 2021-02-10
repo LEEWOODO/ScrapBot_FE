@@ -9,7 +9,7 @@ class Keywords extends Component {
     state = {
 
         keywords: [
-            "봄", "여름", "가을", "겨울"
+            "로그인 해주세요"
 
         ],
         inputKeyword: "",

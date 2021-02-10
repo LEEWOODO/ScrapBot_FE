@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import NewsCard from "../NewsCard";
 
 import Kakao, { getEmails, isLogin } from "../../Kakao";
-
+import { Link } from "react-router-dom";
 import {
   getNewsData,
   getUserinfoByEmail,
@@ -37,38 +37,10 @@ class News extends Component {
         },
       ],
       startDate: new Date(),
+      isNoKeyword: 0, //if loading -0, nokeyword -3, keywordExsit -1
     };
   }
 
-  // loginWithKakao = () => {
-  //   try {
-  //     return new Promise((resolve, reject) => {
-  //       if (!Kakao) {
-  //         reject("Kakao 인스턴스가 존재하지 않습니다.");
-  //       } else {
-  //         Kakao.Auth.login({
-  //           success: (auth) => {
-  //             console.log("정상적으로 로그인 되었습니다.", auth);
-  //             this.setState({ isLogin: true });
-  //           },
-  //           fail: (err) => {
-  //             console.error(err);
-  //           },
-  //         });
-  //       }
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-  // logoutWithKakao = () => {
-  //   if (Kakao.Auth.getAccessToken()) {
-  //     Kakao.Auth.logout(() => {
-  //       console.log("로그아웃 되었습니다", Kakao.Auth.getAccessToken());
-  //       this.setState({ isLogin: false, email: "" });
-  //     });
-  //   }
-  // };
   async componentDidMount() {
     let email = "";
     const islogin = await isLogin(this);
@@ -76,16 +48,27 @@ class News extends Component {
     let userinfo = await getUserinfoByEmail(email, this);
     let newsdata = await getNewsData(userinfo.id, this);
     this.setState({ newsResult: newsdata });
+
+    this.checkKeyWordsLength(userinfo.keywords);
   }
   async gettingNewsData(userId, date) {
     const { userinfo } = this.state;
+
     console.log(this.state);
     let newsdata = await getNewsDataByDate(userinfo.id, date, this);
     this.setState({ newsResult: newsdata });
   }
+  checkKeyWordsLength = (keywordsArray) => {
+    console.log(keywordsArray.length);
+    if (keywordsArray.length <= 0) {
+      this.setState({ isNoKeyword: 3 });
+    } else {
+      this.setState({ isNoKeyword: 1 });
+    }
+  };
 
   render() {
-    const { newsResult, startDate, userinfo } = this.state;
+    const { newsResult, startDate, userinfo, isNoKeyword } = this.state;
     // console.log(userinfo);
     const newcompanies = Array.from(
       new Set(newsResult.map((news) => news.newcompany))
@@ -93,72 +76,99 @@ class News extends Component {
     Array.from(new Set(newcompanies));
 
     // registerLocale("ko", ko);
-    return (
-      <>
-        <Button
-          key={0}
-          variant="primary"
-          className="float-right"
-          onClick={() => {
-            alert("기사 제목이 복사되었습니다.");
+    if (isNoKeyword === 1) {
+      return (
+        <>
+          <Button
+            key={0}
+            variant="primary"
+            className="float-right"
+            onClick={() => {
+              alert("기사 제목이 복사되었습니다.");
 
-            let companyTitle = "";
-            const copyNewsDataList = newsResult
-              .map((news) => {
-                let copyNewsData = "";
-                if (companyTitle !== news.newcompany) {
-                  companyTitle = news.newcompany;
-                  copyNewsData += "▶" + news.newcompany + "\n";
-                }
-                copyNewsData +=
-                  "\t" +
-                  news.title +
-                  " " +
-                  news.pagenumber +
-                  (news.topornot ? " 톱" : "") +
-                  "\n";
-                return copyNewsData;
-              })
-              .reduce((prev, curr) => prev + curr);
-            copy(copyNewsDataList);
-          }}
-        >
-          기사 제목들만 복사하기 >
-        </Button>
-        <br></br>
-        <br></br>
-        {/* 날짜 추가 부분 시작 - 20210102 */}
-        <div className="d-flex justify-content-center">
-          <div style={{ fontSize: "15px" }}>&nbsp;날 짜 선 택&nbsp;</div>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              console.log(date);
-              this.setState({ startDate: date });
-              this.gettingNewsData(userinfo.id, date);
+              let companyTitle = "";
+              const copyNewsDataList = newsResult
+                .map((news) => {
+                  let copyNewsData = "";
+                  if (companyTitle !== news.newcompany) {
+                    companyTitle = news.newcompany;
+                    copyNewsData += "▶" + news.newcompany + "\n";
+                  }
+                  copyNewsData +=
+                    "\t" +
+                    news.title +
+                    " " +
+                    news.pagenumber +
+                    (news.topornot ? " 톱" : "") +
+                    "\n";
+                  return copyNewsData;
+                })
+                .reduce((prev, curr) => prev + curr);
+              copy(copyNewsDataList);
             }}
-            locale={ko}
-          />
-        </div>
+          >
+            기사 제목들만 복사하기 >
+          </Button>
+          <br></br>
+          <br></br>
+          {/* 날짜 추가 부분 시작 - 20210102 */}
+          <div className="d-flex justify-content-center">
+            <div style={{ fontSize: "15px" }}>&nbsp;날 짜 선 택&nbsp;</div>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                console.log(date);
+                this.setState({ startDate: date });
+                this.gettingNewsData(userinfo.id, date);
+              }}
+              locale={ko}
+            />
+          </div>
 
-        {/* 날짜 추가 부분 완성 - 20210102*/}
-        {newcompanies.map((Companyname) => {
-          return (
-            <>
-              <div className="card container mt-2 mb-2 p-1">
-                <div className="card-body">
-                  <div style={{ fontSize: "15px" }}>▶{Companyname}</div>
-                  {newsResult.map((news) => {
-                    if (Companyname === news.newcompany)
-                      return <NewsCard key={news.id} item={news}></NewsCard>;
-                  })}
+          {/* 날짜 추가 부분 완성 - 20210102*/}
+          {newcompanies.map((Companyname) => {
+            return (
+              <>
+                <div className="card container mt-2 mb-2 p-1">
+                  <div className="card-body">
+                    <div style={{ fontSize: "15px" }}>▶{Companyname}</div>
+                    {newsResult.map((news) => {
+                      if (Companyname === news.newcompany)
+                        return <NewsCard key={news.id} item={news}></NewsCard>;
+                    })}
+                  </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
-      </>
-    );
+              </>
+            );
+          })}
+        </>
+      );
+    } else if (isNoKeyword === 3) {
+      //there is no keyword
+      return (
+        <>
+          <div className="card container mt-2 mb-2 p-1">
+            <div className="card-body">
+              <h3>등록하신 키워드가 없습니다.</h3>
+              <br />
+              <h4>
+                '키워드 설정' 페이지에서 <br />
+                검색하실 키워드들을 등록해주세요
+              </h4>
+              <Link to="/keywords" className="card-link">
+                <h5>키워드 설정 바로가기</h5>
+              </Link>
+            </div>
+          </div>
+        </>
+      );
+    } else if (isNoKeyword === 0) {
+      return (
+        <>
+          <p>loading page...</p>
+        </>
+      );
+    }
   }
 }
 
