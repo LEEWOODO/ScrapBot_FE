@@ -30,7 +30,6 @@ class Navbar extends Component {
                             });
                         },
                         fail: (err) => {
-                            alert("<loginWithKakao>" + err);
                             Kakao.Auth.authorize({
                                 redirectUri: "http://www.scrapbot.co.kr/"
                             });
@@ -66,7 +65,7 @@ class Navbar extends Component {
             <ul className="nav navbar-nav navbar-right">
                 <li><a href="#" onClick={() =>
                     logoutWithKakao()
-                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span>{email}</span></a></li>
+                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span style={{ fontSize: '14px' }}>로그아웃</span></a></li>
             </ul>
         );
 
@@ -74,15 +73,15 @@ class Navbar extends Component {
             <ul className="nav navbar-nav navbar-right" >
                 <li><a href="#" onClick={() =>
                     loginWithKakao()
-                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span>로그인</span></a></li>
+                } style={{ color: '#343a40', textDecoration: 'none', WebkitTapHighlightColor: 'rgba(0, 0, 0, .1)' }}><span style={{ fontSize: '14px' }}>로그인</span></a></li>
             </ul>
         )
         return (
             <>
-                <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
-                    <Link className="navbar-brand ml-5" to="/">
+                <nav className="navbar navbar-expand-lg navbar-light bg-white">
+                    <Link className="navbar-brand ml-1" to="/">
                         {/* <img src={logo} alt="logo" style={{ width: '35px' }}></img> */}
-                        <h3>SCRAPBOT</h3>
+                        <h5>스크랩봇</h5>
                     </Link>
 
                     <div className="nav navbar-nav navbar-right">{isLogin ? loginView : notLogin}</div>
@@ -100,14 +99,14 @@ class Navbar extends Component {
                             {/* <li className="nav-item active">
                                 <Link className="nav-link text-white text-uppercase ml-5" to="/">Home&nbsp;<i className="fas fa-home"></i><span className="sr-only">(current)</span></Link>
                             </li> */}
-                            <li className="nav-item">
-                                <Link className="nav-link text-white text-uppercase ml-5" to="/news">News</Link>
+                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                                <Link className="nav-link text-white text-uppercase ml-1" to="/news">News</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-white text-uppercase ml-5" to="/keywords">키워드 설정</Link>
+                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                                <Link className="nav-link text-white text-uppercase ml-1" to="/keywords" >키워드 설정</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-white text-uppercase ml-5" to="/news-config">신문사 설정</Link>
+                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                                <Link className="nav-link text-white text-uppercase ml-1" to="/news-config">신문사 설정</Link>
                             </li>
                             {/* <li className="nav-item">
                                 <Link className="nav-link text-white text-uppercase ml-5" to="/contacts">Contact Us</Link>
