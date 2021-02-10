@@ -175,8 +175,7 @@ class News extends Component {
                           className="card-title"
                           style={{ fontSize: "13px" }}
                         >
-                          &nbsp;&nbsp;&nbsp; 입력된 키워드에 해당하는 기사가
-                          없습니다.
+                          &nbsp;&nbsp;&nbsp; 입력된 키워드가 포함된 기사가 없음.
                         </div>
                       </>
                     )}

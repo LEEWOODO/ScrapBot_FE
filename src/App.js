@@ -15,7 +15,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import Keywords from './components/pages/Keywords';
 import News from './components/pages/News';
 import NewsSelect from './components/pages/NewsSelect.jsx';
-
+import Kakao from './Kakao';
 
 // 자동정렬 : 시프트 + 옵션 + F
 
@@ -32,11 +32,12 @@ class App extends Component {
     };
   }
   render() {
+
     return (
       <div>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Keywords} />
+          <Route exact path="/" component={News} />
           <Route path="/news" exact component={News} />
           <Route path="/contacts" component={Contacts} />
           <Route path="/details" component={Details} />
