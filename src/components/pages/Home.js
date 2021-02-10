@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { InfoConsumer } from '../context'
 import Info from '../Info';
-import queryString from 'query-string'
+
 import Kakao from "../../Kakao";
+import { getToken } from '../apis/restApi';
 
 
 class Home extends Component {
@@ -13,12 +14,15 @@ class Home extends Component {
     // }
 
     render() {
-        // const { search } = this.props.location;
-        // const queryObj = queryString.parse(search);
-        // const { code } = queryObj;
-        // console.log(code);
-        // Kakao.Auth.setAccessToken(code);
-        // console.log(Kakao.Auth.getAccessToken());
+
+        const { search } = this.props.location;
+        const queryObj = queryString.parse(search);
+        const { code } = queryObj;
+        //code값이 존재 할 경우
+        if (code !== null || code !== '') {
+            //토큰 새로 발급
+            getToken();
+        }
         // const { getCookie } = this;
         // const token = getCookie('authorize-access-token')
         // if (token) {

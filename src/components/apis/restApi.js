@@ -96,4 +96,19 @@ const subNewdCompany = async (companyid, userid) => {
     return result;
 }
 
-export { getUserinfoByEmail, getNewsData, testPost, deleteKeyword, addKeyword, getNewsCompanies, addNewdCompany, subNewdCompany, getNewsDataByDate };
+const getToken = (code) => {
+    const REST_API_KEY = 'fb9527722b52ff8e010d5eb046d8b82a', redirect_uri = 'http://www.scrapbot.co.kr/';
+    fetch("https://kauth.kakao.com/oauth/token", {
+        body: "grant_type=authorization_code&client_id=" + REST_API_KEY + "&redirect_uri=" + redirect_uri + "&code=" + code,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST"
+    })
+        .then((response) => console.log("response:", response))
+
+}
+
+
+
+export { getUserinfoByEmail, getNewsData, testPost, deleteKeyword, addKeyword, getNewsCompanies, addNewdCompany, subNewdCompany, getNewsDataByDate, getToken };

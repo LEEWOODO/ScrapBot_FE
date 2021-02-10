@@ -15,6 +15,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import Keywords from './components/pages/Keywords';
 import News from './components/pages/News';
 import NewsSelect from './components/pages/NewsSelect.jsx';
+import login from './components/apis/ouath/login';
 
 
 // 자동정렬 : 시프트 + 옵션 + F
@@ -42,7 +43,7 @@ class App extends Component {
           <Route path="/details" component={Details} />
           <Route path="/keywords" component={Keywords} />
           <Route path='/news-config' component={NewsSelect} />
-          <Route component={NotFoundPage} />
+          <Route component={login} />
         </Switch>
         <Footer />
       </div>
