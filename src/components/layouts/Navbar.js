@@ -81,7 +81,7 @@ class Navbar extends Component {
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
                     <Link className="navbar-brand ml-1" to="/">
                         {/* <img src={logo} alt="logo" style={{ width: '35px' }}></img> */}
-                        <h5>스크랩봇</h5>
+                        <span style={{ fontSize: '17px' }}>스크랩봇</span>
                     </Link>
 
                     <div className="nav navbar-nav navbar-right">{isLogin ? loginView : notLogin}</div>
