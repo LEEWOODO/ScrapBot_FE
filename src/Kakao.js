@@ -55,9 +55,9 @@ async function getEmails(component) {
             },
             fail: function (error) {
                 alert("<getEmails>maybe here i think" + error);
-                // window.Kakao.Auth.authorize({
-                //     redirectUri: "http://www.scrapbot.co.kr/"
-                // });
+                window.Kakao.Auth.authorize({
+                    redirectUri: "http://www.scrapbot.co.kr/"
+                });
 
             },
         });
