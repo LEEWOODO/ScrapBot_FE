@@ -54,6 +54,7 @@ async function getEmails(component) {
 
             },
             fail: function (error) {
+                window.Kakao.Auth.setAccessToken();
                 window.Kakao.Auth.authorize({
                     redirectUri: "http://www.scrapbot.co.kr/"
                 });
