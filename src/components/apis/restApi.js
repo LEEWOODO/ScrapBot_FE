@@ -108,7 +108,6 @@ const getToken = (code) => {
         .then((json) => {
             Kakao.Auth.setAccessToken(json.access_token);
         })
-
 }
 
 
