@@ -81,7 +81,8 @@ class Navbar extends Component {
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
                     <Link className="navbar-brand ml-1" to="/">
                         {/* <img src={logo} alt="logo" style={{ width: '35px' }}></img> */}
-                        <span style={{ fontSize: '17px' }}>스크랩봇</span>
+                        {/* <span style={{ fontSize: '17px' }}>스크랩봇</span> */}
+                        <h5>스크랩봇</h5>
                     </Link>
 
                     <div className="nav navbar-nav navbar-right">{isLogin ? loginView : notLogin}</div>
@@ -99,13 +100,13 @@ class Navbar extends Component {
                             {/* <li className="nav-item active">
                                 <Link className="nav-link text-white text-uppercase ml-5" to="/">Home&nbsp;<i className="fas fa-home"></i><span className="sr-only">(current)</span></Link>
                             </li> */}
-                            <li className="nav-item" style={{ fontSize: '11px' }}>
+                            <li className="nav-item" style={{ fontSize: '13px' }}>
                                 <Link className="nav-link text-white text-uppercase " to="/news">News</Link>
                             </li>
-                            <li className="nav-item" style={{ fontSize: '11px' }}>
+                            <li className="nav-item" style={{ fontSize: '13px' }}>
                                 <Link className="nav-link text-white text-uppercase " to="/keywords" >키워드 설정</Link>
                             </li>
-                            <li className="nav-item" style={{ fontSize: '11px' }}>
+                            <li className="nav-item" style={{ fontSize: '13px' }}>
                                 <Link className="nav-link text-white text-uppercase " to="/news-config">신문사 설정</Link>
                             </li>
                             {/* <li className="nav-item">
