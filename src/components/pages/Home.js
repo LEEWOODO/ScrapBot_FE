@@ -13,22 +13,13 @@ class Home extends Component {
         const queryObj = queryString.parse(search);
         const { code } = queryObj;
         //code값이 존재 할 경우
-        if (code !== null || code !== '') {
+        alert(code == undefined); // => code가 존재 
+        if (code != undefined) {
             //토큰 새로 발급
+            alert("getToken : " + code)
             getToken(code);
         }
 
-        // if (token) {
-        //     console.log("token:" + token);
-        //     Kakao.Auth.setAccessToken(token)
-        //     Kakao.Auth.getStatusInfo(({ status }) => {
-        //         if (status === 'connected') {
-        //             document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
-        //         } else {
-        //             Kakao.Auth.setAccessToken(null)
-        //         }
-        //     })
-        // }
 
         return (
             <div className="container">

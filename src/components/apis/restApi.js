@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import Kakao from '../../Kakao'
 
 const getUserinfoByEmail = async (email, component) => {
     const url = 'http://34.64.173.25:8090/api/user/info/' + email;
