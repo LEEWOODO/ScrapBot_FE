@@ -26,9 +26,9 @@ const getEmail = (component) => {
                     },
                     fail: function (error) {
                         console.log("<getEmail>maybe here i think" + error);
-                        // window.Kakao.Auth.authorize({
-                        //     redirectUri: "http://www.scrapbot.co.kr/"
-                        // });
+                        window.Kakao.Auth.authorize({
+                            redirectUri: "http://www.scrapbot.co.kr/"
+                        });
                     },
                 });
             }
