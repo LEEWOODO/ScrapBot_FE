@@ -13,7 +13,6 @@ class Home extends Component {
         const queryObj = queryString.parse(search);
         const { code } = queryObj;
         //code값이 존재 할 경우
-        alert(code == undefined); // => code가 존재 
         if (code != undefined) {
             //토큰 새로 발급
             alert("getToken : " + code)

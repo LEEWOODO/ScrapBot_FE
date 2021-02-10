@@ -106,6 +106,8 @@ const getToken = (code) => {
         method: "POST"
     })
         .then((response) => {
+            console.log(response);
+            alert('ddddd')
             Kakao.Auth.setAccessToken(response.access_token);
             alert(response.access_token)
         })
