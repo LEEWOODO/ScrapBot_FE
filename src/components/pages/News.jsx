@@ -147,7 +147,7 @@ class News extends Component {
             <>
               <div className="card container mt-2 mb-2 p-1">
                 <div className="card-body">
-                  <span style={{ fontSize: "11px" }}>{Companyname}</span>
+                  <div style={{ fontSize: "11px" }}>{Companyname}</div>
                   {newsResult.map((news) => {
                     if (Companyname === news.newcompany)
                       return <NewsCard key={news.id} item={news}></NewsCard>;
