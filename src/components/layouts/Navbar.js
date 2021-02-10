@@ -86,7 +86,7 @@ class Navbar extends Component {
 
                     <div className="nav navbar-nav navbar-right">{isLogin ? loginView : notLogin}</div>
                 </nav>
-                <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+                <nav className="navbar navbar-expand-sm navbar-light bg-dark">
                     {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span>
                             <i className="fas fa-bars" style={{ color: '#fff' }}></i>
