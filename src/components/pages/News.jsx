@@ -21,7 +21,7 @@ class News extends Component {
 
     // Quiz 자체에 state를 할당하고, items에 기본값을 줍니다.
     this.state = {
-      islogin: false,
+      isLogin: false,
       email: "",
       userinfo: { id: 0 },
       newsResult: [
@@ -99,7 +99,7 @@ class News extends Component {
       userinfo,
       isNoKeyword,
       totalCompanyList,
-      islogin,
+      isLogin,
     } = this.state;
     // console.log(userinfo);
     const newcompaniesSetByDate = Array.from(
@@ -107,8 +107,8 @@ class News extends Component {
     );
 
     // registerLocale("ko", ko);
-    console.log("islogin" + islogin);
-    if (islogin === false)
+    console.log("isLogin" + isLogin);
+    if (isLogin === false)
       return (
         <>
           <div className="card container mt-2 mb-2 p-1">
