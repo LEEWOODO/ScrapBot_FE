@@ -97,31 +97,17 @@ const subNewdCompany = async (companyid, userid) => {
 }
 
 const getToken = (code) => {
-    alert("grant_type=authorization_code&client_id=fb9527722b52ff8e010d5eb046d8b82a&redirect_uri=http://www.scrapbot.co.kr/&code=" + code)
     fetch("https://kauth.kakao.com/oauth/token", {
         body: "grant_type=authorization_code&client_id=fb9527722b52ff8e010d5eb046d8b82a&redirect_uri=http://www.scrapbot.co.kr/&code=" + code,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST"
-    }).then(response => response.json())
+    })
+        .then(response => response.json())
         .then((json) => {
-            console.log(json.access_token);
             Kakao.Auth.setAccessToken(json.access_token);
         })
-    // const { getCookie } = this;
-    // const token = getCookie('authorize-access-token')
-    // if (token) {
-    //     console.log("token:" + token);
-    //     Kakao.Auth.setAccessToken(token)
-    //     Kakao.Auth.getStatusInfo(({ status }) => {
-    //         if (status === 'connected') {
-    //             document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
-    //         } else {
-    //             Kakao.Auth.setAccessToken(null)
-    //         }
-    //     })
-    // }
 
 }
 
