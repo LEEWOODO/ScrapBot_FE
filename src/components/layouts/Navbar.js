@@ -99,13 +99,13 @@ class Navbar extends Component {
                             {/* <li className="nav-item active">
                                 <Link className="nav-link text-white text-uppercase ml-5" to="/">Home&nbsp;<i className="fas fa-home"></i><span className="sr-only">(current)</span></Link>
                             </li> */}
-                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                            <li className="nav-item" style={{ fontSize: '11px' }}>
                                 <Link className="nav-link text-white text-uppercase ml-1" to="/news">News</Link>
                             </li>
-                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                            <li className="nav-item" style={{ fontSize: '11px' }}>
                                 <Link className="nav-link text-white text-uppercase ml-1" to="/keywords" >키워드 설정</Link>
                             </li>
-                            <li className="nav-item" style={{ fontSize: '14px' }}>
+                            <li className="nav-item" style={{ fontSize: '11px' }}>
                                 <Link className="nav-link text-white text-uppercase ml-1" to="/news-config">신문사 설정</Link>
                             </li>
                             {/* <li className="nav-item">
