@@ -13,7 +13,7 @@ class NewsCard extends Component {
             <InfoConsumer>
                 {value => (
                     <>
-                        <h5 key={id} className="card-title" onClick={() => {
+                        <span key={id} className="card-title" onClick={() => {
                             //아래의 p tag 숨김 or 보임
                             let ptag = document.getElementById(id + '_div');
                             if (ptag.style.display === 'none') {
@@ -22,11 +22,11 @@ class NewsCard extends Component {
                                 ptag.style.display = 'none';
                             }
 
-                        }}>
+                        }} style={{ fontSize: '11px' }}>
                             &nbsp;&nbsp;&nbsp;V {title}/{pagenumber}면
-                        </h5>
+                        </span>
                         <div id={id + '_div'} style={{ display: 'none' }}>
-                            <p className="card-text" id={id + '_content'} >{changedtext}</p>
+                            <p className="card-text" id={id + '_content'} style={{ fontSize: '9px' }}>{changedtext}</p>
                             <Link to={{ pathname: url }} className="card-link" target="_blank"> 기사 원문으로 이동
                             </Link>
                         </div>
