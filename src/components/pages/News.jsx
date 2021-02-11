@@ -153,6 +153,7 @@ class News extends Component {
                       )
                   : (StringResult +=
                       "\t" + "입력된 키워드가 포함된 기사가 없음.\n");
+                StringResult += "\n";
               });
 
               // const copyNewsDataList = newsResult
