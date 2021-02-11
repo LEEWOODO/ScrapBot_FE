@@ -134,25 +134,45 @@ class News extends Component {
             onClick={() => {
               alert("기사 제목이 복사되었습니다.");
 
-              let companyTitle = "";
-              const copyNewsDataList = newsResult
-                .map((news) => {
-                  let copyNewsData = "";
-                  if (companyTitle !== news.newcompany) {
-                    companyTitle = news.newcompany;
-                    copyNewsData += "▶" + news.newcompany + "\n";
-                  }
-                  copyNewsData +=
-                    "\t" +
-                    news.title +
-                    " " +
-                    news.pagenumber +
-                    (news.topornot ? " 톱" : "") +
-                    "\n";
-                  return copyNewsData;
-                })
-                .reduce((prev, curr) => prev + curr);
-              copy(copyNewsDataList);
+              // let companyTitle = "";
+              let StringResult = "";
+              totalCompanyList.forEach((Companyname) => {
+                StringResult += "▶" + Companyname + "\n";
+                newcompaniesSetByDate.includes(Companyname)
+                  ? newsResult
+                      .filter((news) => news.newcompany === Companyname)
+                      .forEach(
+                        (news) =>
+                          (StringResult +=
+                            "\t" +
+                            news.title +
+                            " " +
+                            news.pagenumber +
+                            (news.topornot ? " 톱" : "") +
+                            "\n")
+                      )
+                  : (StringResult +=
+                      "\t" + "입력된 키워드가 포함된 기사가 없음.\n");
+              });
+
+              // const copyNewsDataList = newsResult
+              //   .map((news) => {
+              //     let copyNewsData = "";
+              //     if (companyTitle !== news.newcompany) {
+              //       companyTitle = news.newcompany;
+              //       copyNewsData += "▶" + news.newcompany + "\n";
+              //     }
+              //     copyNewsData +=
+              //       "\t" +
+              //       news.title +
+              //       " " +
+              //       news.pagenumber +
+              //       (news.topornot ? " 톱" : "") +
+              //       "\n";
+              //     return copyNewsData;
+              //   })
+              //   .reduce((prev, curr) => prev + curr);
+              copy(StringResult);
             }}
           >
             기사 제목들만 복사하기 >
