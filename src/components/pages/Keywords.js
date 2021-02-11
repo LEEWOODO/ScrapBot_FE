@@ -109,7 +109,7 @@ class Keywords extends Component {
                         <div className="container-fluid mt-2 mb-3 p-5" >
                             <h5 className="display-5 font-weight-bold">키워드 등록</h5>
                             <p>키워드를 등록해두면 관련된 기사들을 확인 할 수 있어요.</p>
-                            <Link to='#'>혹시 키워드와 관련된 알림이 오지 않나요?</Link>
+                            <Link to={{ pathname: 'https://www.notion.so/71ceebc34e8641a9b33e935b8ba30c7d' }} className="card-link" target="_blank">사용법 설명서 보기</Link>
                             <form className="form-inline my-2 my-lg-0" onSubmit={this.handleSubmit}>
                                 <input className="form-control mr-sm-2" type="search" placeholder="키워드를 입력해주세요." aria-label="Search" name="inputKeyword" value={this.state.inputKeyword} onChange={handleChange} />
                                 <button className="btn btn-outline-primary my-2 my-sm-0" type="button" onClick={handleCreate}>등록</button>
