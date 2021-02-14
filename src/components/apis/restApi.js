@@ -106,9 +106,9 @@ const getToken = (code) => {
     })
         .then(response => response.json())
         .then((json) => {
-
-            alert("기존 토큰  : " + Kakao.Auth.getAccessToken() + "\n" +
-                "바뀔 토큰  : " + json.access_token)
+            
+            alert("기존 토큰  : "+Kakao.Auth.getAccessToken+"\n"+
+                "바뀔 토큰  : "+json.access_token)
             Kakao.Auth.setAccessToken(json.access_token);
         })
 }

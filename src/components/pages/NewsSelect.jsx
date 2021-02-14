@@ -14,15 +14,7 @@ class NewsSelect extends Component {
         newsCompanySet: [],
       },
       companies: [],
-      totalCompanyList: [
-        "조선일보",
-        "중앙일보",
-        "동아일보",
-        "매일경제",
-        "한국경제",
-        "서울경제",
-        "머니투데이",
-      ],
+      
     };
   }
 

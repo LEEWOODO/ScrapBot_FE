@@ -15,7 +15,6 @@ class Home extends Component {
         //code값이 존재 할 경우
         if (code != undefined) {
             //토큰 새로 발급
-            alert("getToken : " + code)
             getToken(code);
         }
 
