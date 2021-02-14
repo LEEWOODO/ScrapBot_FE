@@ -61,14 +61,6 @@ class News extends Component {
     this.setState({ newsResult: newsdata });
 
     this.checkKeyWordsLength(userinfo.keywords);
-
-    //구글 애널리틱스
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-    gtag("config", "G-WNXTH7B67S");
   }
 
   async filterSelectedCompany() {
