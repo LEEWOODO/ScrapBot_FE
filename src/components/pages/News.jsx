@@ -107,24 +107,24 @@ class News extends Component {
       new Set(newsResult.map((news) => news.newcompany))
     );
 
-    let currentOs = "";
+    let newLine = "";
 
     function checkMobile() {
       var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
 
       if (varUA.indexOf("android") > -1) {
         //안드로이드
-        currentOs = "android";
+        newLine = "\r\n";
       } else if (
         varUA.indexOf("iphone") > -1 ||
         varUA.indexOf("ipad") > -1 ||
         varUA.indexOf("ipod") > -1
       ) {
         //IOS
-        currentOs = "ios";
+        newLine = "\n";
       } else {
         //아이폰, 안드로이드 외
-        currentOs = "other";
+        newLine = "\n";
       }
     }
     checkMobile();
@@ -157,7 +157,7 @@ class News extends Component {
               alert("기사 제목이 복사되었습니다.");
               let StringResult = "";
               totalCompanyList.forEach((Companyname) => {
-                StringResult += "▶" + Companyname + "\n";
+                StringResult += "▶" + Companyname + newLine;
                 newcompaniesSetByDate.includes(Companyname)
                   ? newsResult
                       .filter((news) => news.newcompany === Companyname)
@@ -169,17 +169,12 @@ class News extends Component {
                             " " +
                             news.pagenumber +
                             (news.topornot ? " 톱" : "") +
-                            "\n")
+                            newLine)
                       )
                   : (StringResult +=
-                      "\t" + "입력된 키워드가 포함된 기사가 없음.\n");
-                StringResult += "\n";
+                      "\t" + "입력된 키워드가 포함된 기사가 없음." + newLine);
+                StringResult += newLine;
               });
-              if (currentOs === "ios" || currentOs === "other")
-                copy(StringResult);
-              else if (currentOs === "") {
-                copyAnd(StringResult);
-              }
             }}
           >
             기사 제목들만 복사하기 >
