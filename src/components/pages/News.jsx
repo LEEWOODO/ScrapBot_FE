@@ -15,6 +15,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import copyAnd from "copy-text-to-clipboard";
+import os from "os";
 // import clipboardImg from "../../../public/images/clipboard.svg";
 class News extends Component {
   constructor(props) {
@@ -114,6 +115,7 @@ class News extends Component {
 
       if (varUA.indexOf("android") > -1) {
         //안드로이드
+        alert(JSON.stringify(os.EOL));
         newLine = "<br>";
       } else if (
         varUA.indexOf("iphone") > -1 ||
@@ -122,6 +124,7 @@ class News extends Component {
       ) {
         //IOS
         newLine = "\n";
+        alert(JSON.stringify(os.EOL));
       } else {
         //아이폰, 안드로이드 외
         newLine = "\n";
