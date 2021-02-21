@@ -106,6 +106,28 @@ class News extends Component {
       new Set(newsResult.map((news) => news.newcompany))
     );
 
+    function checkMobile() {
+      var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+
+      if (varUA.indexOf("android") > -1) {
+        //안드로이드
+        alert("android");
+        return "android";
+      } else if (
+        varUA.indexOf("iphone") > -1 ||
+        varUA.indexOf("ipad") > -1 ||
+        varUA.indexOf("ipod") > -1
+      ) {
+        //IOS
+        alert("ios");
+        return "ios";
+      } else {
+        //아이폰, 안드로이드 외
+        alert("other");
+        return "other";
+      }
+    }
+    checkMobile();
     // registerLocale("ko", ko);
     console.log("isLogin" + isLogin);
     if (isLogin === false)
@@ -133,8 +155,6 @@ class News extends Component {
             className="float-right"
             onClick={() => {
               alert("기사 제목이 복사되었습니다.");
-
-              // let companyTitle = "";
               let StringResult = "";
               totalCompanyList.forEach((Companyname) => {
                 StringResult += "▶" + Companyname + "\n";
@@ -155,24 +175,6 @@ class News extends Component {
                       "\t" + "입력된 키워드가 포함된 기사가 없음.\n");
                 StringResult += "\n";
               });
-
-              // const copyNewsDataList = newsResult
-              //   .map((news) => {
-              //     let copyNewsData = "";
-              //     if (companyTitle !== news.newcompany) {
-              //       companyTitle = news.newcompany;
-              //       copyNewsData += "▶" + news.newcompany + "\n";
-              //     }
-              //     copyNewsData +=
-              //       "\t" +
-              //       news.title +
-              //       " " +
-              //       news.pagenumber +
-              //       (news.topornot ? " 톱" : "") +
-              //       "\n";
-              //     return copyNewsData;
-              //   })
-              //   .reduce((prev, curr) => prev + curr);
               copy(StringResult);
             }}
           >
