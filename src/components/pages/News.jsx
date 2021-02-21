@@ -108,7 +108,7 @@ class News extends Component {
       new Set(newsResult.map((news) => news.newcompany))
     );
 
-    let newLine = JSON.stringify(os.EOL);
+    let newLine = os.EOL;
 
     // function checkMobile() {
     //   var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
