@@ -14,6 +14,7 @@ import Button from "react-bootstrap/Button";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
+import copyAnd from "copy-text-to-clipboard";
 // import clipboardImg from "../../../public/images/clipboard.svg";
 class News extends Component {
   constructor(props) {
@@ -106,25 +107,24 @@ class News extends Component {
       new Set(newsResult.map((news) => news.newcompany))
     );
 
+    let currentOs = "";
+
     function checkMobile() {
       var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
 
       if (varUA.indexOf("android") > -1) {
         //안드로이드
-        alert("android");
-        return "android";
+        currentOs = "android";
       } else if (
         varUA.indexOf("iphone") > -1 ||
         varUA.indexOf("ipad") > -1 ||
         varUA.indexOf("ipod") > -1
       ) {
         //IOS
-        alert("ios");
-        return "ios";
+        currentOs = "ios";
       } else {
         //아이폰, 안드로이드 외
-        alert("other");
-        return "other";
+        currentOs = "other";
       }
     }
     checkMobile();
@@ -175,7 +175,11 @@ class News extends Component {
                       "\t" + "입력된 키워드가 포함된 기사가 없음.\n");
                 StringResult += "\n";
               });
-              copy(StringResult);
+              if (currentOs === "ios" || currentOs === "other")
+                copy(StringResult);
+              else if (currentOs === "") {
+                copyAnd(StringResult);
+              }
             }}
           >
             기사 제목들만 복사하기 >
