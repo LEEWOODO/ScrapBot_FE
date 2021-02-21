@@ -114,7 +114,7 @@ class News extends Component {
 
       if (varUA.indexOf("android") > -1) {
         //안드로이드
-        newLine = "\r\n";
+        newLine = "<br>";
       } else if (
         varUA.indexOf("iphone") > -1 ||
         varUA.indexOf("ipad") > -1 ||
