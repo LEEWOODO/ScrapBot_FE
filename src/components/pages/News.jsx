@@ -108,29 +108,29 @@ class News extends Component {
       new Set(newsResult.map((news) => news.newcompany))
     );
 
-    let newLine = os.EOL;
+    let newLine = "";
 
-    // function checkMobile() {
-    //   var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+    function checkMobile() {
+      var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
 
-    //   if (varUA.indexOf("android") > -1) {
-    //     //안드로이드
-    //     alert(JSON.stringify(os.EOL));
-    //     newLine = "<br>";
-    //   } else if (
-    //     varUA.indexOf("iphone") > -1 ||
-    //     varUA.indexOf("ipad") > -1 ||
-    //     varUA.indexOf("ipod") > -1
-    //   ) {
-    //     //IOS
-    //     newLine = "\n";
-    //     alert(JSON.stringify(os.EOL));
-    //   } else {
-    //     //아이폰, 안드로이드 외
-    //     newLine = "\n";
-    //   }
-    // }
-    // checkMobile();
+      if (varUA.indexOf("android") > -1) {
+        //안드로이드
+        alert(JSON.stringify(os.EOL));
+        newLine = "<br/>";
+      } else if (
+        varUA.indexOf("iphone") > -1 ||
+        varUA.indexOf("ipad") > -1 ||
+        varUA.indexOf("ipod") > -1
+      ) {
+        //IOS
+        newLine = "\n";
+        alert(JSON.stringify(os.EOL));
+      } else {
+        //아이폰, 안드로이드 외
+        newLine = "\n";
+      }
+    }
+    checkMobile();
     // registerLocale("ko", ko);
     console.log("isLogin" + isLogin);
     if (isLogin === false)
