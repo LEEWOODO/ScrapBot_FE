@@ -130,7 +130,7 @@ class News extends Component {
     //     newLine = "\n";
     //   }
     // }
-    checkMobile();
+    // checkMobile();
     // registerLocale("ko", ko);
     console.log("isLogin" + isLogin);
     if (isLogin === false)
