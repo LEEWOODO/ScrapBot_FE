@@ -175,6 +175,7 @@ class News extends Component {
                       "\t" + "입력된 키워드가 포함된 기사가 없음." + newLine);
                 StringResult += newLine;
               });
+              copy(StringResult);
             }}
           >
             기사 제목들만 복사하기 >
